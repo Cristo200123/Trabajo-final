@@ -1,0 +1,7 @@
+body { font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, Arial; }
+.card-product { transition: transform .18s ease, box-shadow .18s ease; }
+.card-product:hover { transform: translateY(-6px); box-shadow: 0 10px 25px rgba(13,38,76,0.06); }
+.product-desc { display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+.badge-stock { font-size: .75rem; }
+.toast { z-index: 2000; }
+:focus { outline: 3px solid rgba(13,110,253,0.12); outline-offset: 2px; }

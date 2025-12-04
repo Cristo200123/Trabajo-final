@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <title>Mi Tienda de Compra</title>
+
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body class="bg-light">
+
+  <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+    <div class="container d-flex align-items-center">
+      <a class="navbar-brand" href="#">
+        <img src="img/logo.png" style="height:80px;">
+      </a>
+
+      <div class="ms-auto d-flex gap-2 align-items-center">
+        <a href="login.html" class="btn btn-outline-light btn-sm">Iniciar sesión</a>
+        <a href="registro.html" class="btn btn-outline-light btn-sm">Registrarse</a>
+        <button id="btnAdmin" class="btn btn-outline-light btn-sm">Admin</button>
+        <a href="carrito.html" class="btn btn-outline-light btn-sm position-relative">
+          <i class="bi bi-basket3"></i>
+          <span class="ms-1">Carrito</span>
+          <span id="cartCount" class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger d-none">0</span>
+        </a>
+      </div>
+    </div>
+  </nav>
+
+  <header class="py-4 bg-white border-bottom text-center">
+    <h1 class="h4">Bienvenido a tu tienda online</h1>
+  </header>
+
+  <main class="container my-4">
+    <div class="d-flex justify-content-between align-items-center mb-3">
+      <div class="d-flex gap-2">
+        <input id="search" class="form-control form-control-sm" placeholder="Buscar producto...">
+        <select id="sort" class="form-select form-select-sm" style="width:160px">
+          <option value="default">Orden</option>
+          <option value="price_asc">Precio ↑</option>
+          <option value="price_desc">Precio ↓</option>
+          <option value="name">Nombre A-Z</option>
+        </select>
+      </div>
+      <button id="openAdmin" class="btn btn-outline-secondary btn-sm">Panel Admin</button>
+    </div>
+    <input id="minPrecio" type="number" placeholder="Precio mínimo" class="form-control form-control-sm">
+<input id="maxPrecio" type="number" placeholder="Precio máximo" class="form-control form-control-sm">
+
+<select id="categoriaFiltro" class="form-select form-select-sm">
+  <option value="">Categoría</option>
+  <option value="1">Tecnología</option>
+  <option value="3">Ropa</option>
+  <option value="6">Hogar</option>
+  <option value="7">Electrodomésticos</option>
+</select>
+
+<label>
+  <input id="envioGratis" type="checkbox"> Envío gratis
+</label>
+
+<label>
+  <input id="stockDisponible" type="checkbox"> Solo disponibles
+</label>
+
+
+    <div id="productGrid" class="row g-4"></div>
+  </main>
+
+  <footer class="py-4 bg-white border-top text-center small text-muted">
+    Mi Tienda de Compra © 2025
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
