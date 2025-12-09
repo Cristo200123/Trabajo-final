@@ -11,31 +11,50 @@
 
 <body class="bg-light">
 
-  <nav class="navbar navbar-dark bg-primary">
-    <div class="container d-flex align-items-center">
-      <a class="navbar-brand d-flex align-items-center" href="index.html">
-        <img src="img/logo.png" style="height:40px; margin-right:10px;" alt="Logo">
-        <span>Mi Tienda de Compra</span>
-      </a>
-    </div>
-  </nav>
+  <!-- HEADER + NAV -->
+  <header>
+    <nav class="navbar navbar-dark bg-primary">
+      <div class="container d-flex align-items-center">
+        <a class="navbar-brand d-flex align-items-center" href="index.html">
+          <img src="img/logo.png" style="height:40px; margin-right:10px;" alt="Logo">
+          <span>Mi Tienda de Compra</span>
+        </a>
+      </div>
+    </nav>
+  </header>
 
-  <div class="container py-4">
+  <!-- CONTENIDO PRINCIPAL -->
+  <main class="container py-4">
 
-    <h3 class="mb-3">Carrito</h3>
+    <!-- TÍTULO -->
+    <section>
+      <h3 class="mb-3">Carrito</h3>
+    </section>
 
-    <div id="cartList" class="list-group"></div>
+    <!-- LISTA DEL CARRITO -->
+    <section>
+      <div id="cartList" class="list-group"></div>
+    </section>
 
     <hr>
 
-    <div class="d-flex justify-content-between align-items-center">
+    <!-- TOTAL -->
+    <section class="d-flex justify-content-between align-items-center">
       <h4>Total:</h4>
       <h4 id="cartTotal">$0.00</h4>
-    </div>
+    </section>
 
-    <button id="checkoutBtn" class="btn btn-success w-100 mt-3">Finalizar compra</button>
+    <!-- BOTÓN FINALIZAR COMPRA -->
+    <section>
+      <button id="checkoutBtn" class="btn btn-success w-100 mt-3">Finalizar compra</button>
+    </section>
 
-  </div>
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="py-4 bg-white border-top text-center small text-muted">
+    Carrito de compras – Mi Tienda de Compra © 2025
+  </footer>
 
   <script src="app.js"></script>
 

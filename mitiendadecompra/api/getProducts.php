@@ -1,64 +1,40 @@
 <?php
-require 'config.php';
+// Limpia cualquier salida previa (evita que aparezca JSON en pantalla)
+ob_clean();
+header("Content-Type: application/json; charset=utf-8");
 
-// Parámetros recibidos
-$q          = $_GET['q']          ?? '';
-$minPrecio  = $_GET['minPrecio']  ?? '';
-$maxPrecio  = $_GET['maxPrecio']  ?? '';
-$categoria  = $_GET['categoria']  ?? '';
-$envio      = $_GET['envio']      ?? '';
-$stockOnly  = $_GET['stock']      ?? '';   // si viene "1", mostrar solo productos con stock > 0
+require_once "../connection.php";
 
-$sql = "SELECT p.*, c.nombre AS categoria_nombre 
-        FROM productos p 
-        LEFT JOIN categorias c ON c.id = p.categoria_id
-        WHERE 1 ";
+$sql = "SELECT 
+            p.id,
+            p.nombre,
+            p.precio,
+            p.stock,
+            p.descripcion,
+            p.imagen,
+            c.nombre AS categoria
+        FROM productos p
+        LEFT JOIN categorias c ON p.categoria_id = c.id";
 
-$params = [];
+$result = $conn->query($sql);
 
-// 🔍 Buscar por nombre / descripción
-if ($q !== '') {
-    $sql .= " AND (p.nombre LIKE :q OR p.descripcion LIKE :q) ";
-    $params[':q'] = "%$q%";
+$productos = [];
+
+while ($row = $result->fetch_assoc()) {
+
+    $row["precio"] = floatval($row["precio"]);
+
+    if (!$row["imagen"] || $row["imagen"] === "") {
+        $row["imagen"] = null;
+    }
+
+    $productos[] = $row;
 }
 
-// 💸 Filtro precio mínimo
-if ($minPrecio !== '') {
-    $sql .= " AND p.precio >= :min ";
-    $params[':min'] = $minPrecio;
-}
-
-// 💸 Filtro precio máximo
-if ($maxPrecio !== '') {
-    $sql .= " AND p.precio <= :max ";
-    $params[':max'] = $maxPrecio;
-}
-
-// 🏷️ Categoría
-if ($categoria !== '') {
-    $sql .= " AND p.categoria_id = :cat ";
-    $params[':cat'] = $categoria;
-}
-
-// 🚚 Envío gratis
-if ($envio === "1") {
-    $sql .= " AND p.envio_gratis = 1 ";
-}
-
-// 📦 Disponibilidad
-if ($stockOnly === "1") {
-    $sql .= " AND p.stock > 0 ";
-}
-
-// Orden por defecto
-$sql .= " ORDER BY p.id ASC";
-
-$stmt = $pdo->prepare($sql);
-$stmt->execute($params);
-
-jsonOut([
-    'success' => true,
-    'products' => $stmt->fetchAll()
+echo json_encode([
+    "success" => true,
+    "products" => $productos
 ]);
 
-
+ob_end_flush();
+?>
